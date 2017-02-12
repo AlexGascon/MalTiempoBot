@@ -1,0 +1,8 @@
+# PyCharm config folder
+.idea/*
+
+# Local environment settings
+.env
+
+# Virtualenv
+venv_maltiempobot/*
