@@ -19,9 +19,8 @@ server = Flask(__name__)
 # The decorator (@bot.message_handler) indicates the type of messages that will activate this function
 @bot.message_handler(content_types=['location'])
 def get_current_weather_from_location_message(message):
-
-
-
+    weather = get_current_weather_in_location(message)
+    bot.send_message(weather, chat_id=message.chat)
 
 # Server configuration
 @server.route("/bot", methods=['POST'])
