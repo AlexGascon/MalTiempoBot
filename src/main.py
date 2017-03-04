@@ -22,6 +22,10 @@ def get_current_weather_from_location_message(message):
     weather = get_current_weather_in_location(message)
     bot.reply_to(message, weather)
 
+@bot.message_handler(regexp='^ping$')
+def test_that_bot_works(message):
+    bot.reply_to(message, 'ACK')
+
 # Server configuration
 @server.route("/bot", methods=['POST'])
 def getMessage():
