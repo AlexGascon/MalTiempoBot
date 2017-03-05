@@ -26,19 +26,5 @@ def get_current_weather_from_location_message(message):
 def test_that_bot_works(message):
     bot.reply_to(message, 'ACK')
 
-# Server configuration
-@server.route("/bot", methods=['POST'])
-def getMessage():
-    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
-    return "!", 200
-
-@server.route("/")
-def webhook():
-    bot.remove_webhook()
-    bot.set_webhook(url="https://maltiempobot.herokuapp.com/bot")
-    return "!", 200
-
-# Running the server
-# It's very important to set the port with the environment variable, because it's how heroku stores it
-server.run(host="0.0.0.0", port=os.environ.get('PORT', 5000))
-server = Flask(__name__)
+# Starting the bot
+bot.polling()
