@@ -2,7 +2,21 @@ import os
 import requests
 import json
 
+from constants import WEATHER_GROUP_GOOD_WEATHER
 from utils import get_OpenWeatherAPI_token
+
+
+def obtain_weather_from_response(response):
+    """Method that gets the OpenWeather response and returns the part corresponding to the weather"""
+
+    # Deserializing the JSON text
+    json_text = json.loads(response.text)
+
+    # Getting the weather
+    weather_key = 'weather'
+    weather = json_text[weather_key][0]  # Weather is a 1-element array
+
+    return weather
 
 
 def get_current_weather_in_city(city):
@@ -19,8 +33,8 @@ def get_current_weather_in_city(city):
     rq = requests.get(current_weather_URL, params=params)
 
     # Returning the weather
-    response = rq.text
-    return response
+    weather = obtain_weather_from_response(rq)
+    return weather
 
 
 def get_current_weather_in_location(location):
@@ -41,5 +55,5 @@ def get_current_weather_in_location(location):
     rq = requests.get(current_weather_URL, params=params)
 
     # Returning the weather
-    response = rq.text
-    return response
+    weather = obtain_weather_from_response(rq)
+    return weather
