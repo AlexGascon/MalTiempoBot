@@ -32,8 +32,8 @@ def get_current_weather_in_location(location):
     TOKEN = get_OpenWeatherAPI_token()
 
     # Getting longitude and latitude from location
-    lon = location.longitude
-    lat = location.latitude
+    lon = location.location.longitude
+    lat = location.location.latitude
 
     # Asking for the weather
     current_weather_URL = "http://api.openweathermap.org/data/2.5/weather"
