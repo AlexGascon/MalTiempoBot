@@ -34,4 +34,4 @@ def test_that_bot_works(message):
     bot.reply_to(message, 'ACK')
 
 # Starting the bot
-bot.polling()
+bot.polling(none_stop=True)
