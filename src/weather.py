@@ -92,15 +92,15 @@ def get_5day_forecast_in_location(message):
     params = {'appid': TOKEN, 'lon': lon, 'lat': lat}
     rq = requests.get(current_weather_URL, params=params)
 
-    weather = []
-
+    weathers = []
     # Deserializing the JSON text
     json_text = json.loads(rq.text)
 
     # Obtaining all the weather forecast in the 5-day range
     forecast_list = json_text['list']
     for forecast in forecast_list:
-        weather.append(forecast['weather'])
+        for weather in forecast['weather']:
+            weathers.append(weather)
 
     # Returning the weather
-    return weather
+    return weathers
