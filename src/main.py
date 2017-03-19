@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-   
-
-import random
-
 import telebot
 import os
-from flask import Flask, request
 
 from weather import get_current_weather_in_location, is_bad_weather
 
