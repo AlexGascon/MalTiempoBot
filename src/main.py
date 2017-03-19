@@ -10,7 +10,7 @@ bot = telebot.TeleBot(TOKEN)
 
 
 # The decorator (@bot.message_handler) indicates the type of messages that will activate this function
-@bot.message_handler(content_types=['location'])
+#@bot.message_handler(content_types=['location'])
 def answer_if_I_have_to_worry_from_location_message(message):
 
     # Getting the current weather
@@ -37,7 +37,7 @@ def check_5day_forecast_from_location(message):
     if True in I_need_to_worry:
         bot.reply_to(message, 'Et recomane mirar bé el temps abans, ha de ploure en els pròxims 5 dies')
     else:
-        bot.reply_to(message, 'Pots estar tranquil, que fa bon temps!')
+        bot.reply_to(message, 'Pots estar tranquil, que fa i farà bon temps!')
 
 
 
