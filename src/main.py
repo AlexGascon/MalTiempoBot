@@ -14,12 +14,13 @@ bot = telebot.TeleBot(TOKEN)
 def answer_if_I_have_to_worry_from_location_message(message):
 
     # Getting the current weather
-    weather = get_current_weather_in_location(message)
+    weathers = get_current_weather_in_location(message)
 
     # Checking if it's raining/snowing/thunderstorming/etc
-    I_need_to_worry =  is_bad_weather(weather)
+    I_need_to_worry = [is_bad_weather(weather) for weather in weathers]
 
-    if I_need_to_worry:
+
+    if True in I_need_to_worry:
         bot.reply_to(message, 'Males notícies... Si tens roba estesa, ja cal que la llaves altra volta')
     else:
         bot.reply_to(message, 'Pots estar tranquil, que fa bon temps!')
