@@ -7,14 +7,16 @@ from utils import get_OpenWeatherAPI_token
 
 
 def obtain_weather_from_api_response(response):
-    """Method that gets the OpenWeather response and returns the part corresponding to the weather"""
+    """Method that gets the OpenWeather response and returns the part corresponding to the weather
+
+    NOTE: Weather can be an array containing more than one weather condition"""
 
     # Deserializing the JSON text
     json_text = json.loads(response.text)
 
     # Getting the weather
     weather_key = 'weather'
-    weather = json_text[weather_key][0]  # Weather is a 1-element array
+    weather = json_text[weather_key]
 
     return weather
 
@@ -67,3 +69,4 @@ def get_current_weather_in_location(message):
     # Returning the weather
     weather = obtain_weather_from_api_response(rq)
     return weather
+
