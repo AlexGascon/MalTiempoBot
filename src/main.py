@@ -1,12 +1,8 @@
 # -*- coding: utf-8 -*-   
-
-import random
-
 import telebot
 import os
-from flask import Flask, request
 
-from weather import get_current_weather_in_location, is_bad_weather
+from weather import get_current_weather_in_location, is_bad_weather, get_5day_forecast_in_location
 
 # Creating the bot
 TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN') # Token previously stored in an environment var
@@ -18,15 +14,29 @@ bot = telebot.TeleBot(TOKEN)
 def answer_if_I_have_to_worry_from_location_message(message):
 
     # Getting the current weather
-    weather = get_current_weather_in_location(message)
+    weathers = get_current_weather_in_location(message)
 
     # Checking if it's raining/snowing/thunderstorming/etc
-    I_need_to_worry =  is_bad_weather(weather)
+    I_need_to_worry = [is_bad_weather(weather) for weather in weathers]
 
-    if I_need_to_worry:
+    if True in I_need_to_worry:
         bot.reply_to(message, 'Males notícies... Si tens roba estesa, ja cal que la llaves altra volta')
     else:
         bot.reply_to(message, 'Pots estar tranquil, que fa bon temps!')
+
+@bot.message_handler(commands=['lavadora'])
+def check_5day_forecast_from_location(message):
+
+    weathers = get_5day_forecast_in_location(message)
+
+    # Checking if it's raining/snowing/thunderstorming/etc
+    I_need_to_worry = [is_bad_weather(weather) for weather in weathers]
+
+    if True in I_need_to_worry:
+        bot.reply_to(message, 'Et recomane mirar bé el temps abans, ha de ploure en els pròxims 5 dies')
+    else:
+        bot.reply_to(message, 'Pots estar tranquil, que fa bon temps!')
+
 
 
 @bot.message_handler(regexp='^ping$')
