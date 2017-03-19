@@ -70,3 +70,37 @@ def get_current_weather_in_location(message):
     weather = obtain_weather_from_api_response(rq)
     return weather
 
+
+def get_5day_forecast_in_location(message):
+    """Method that gets a 5 day forecast for the specified Telegram Location
+
+    The weather is returned in JSON format. More info about the responses can be found in the official API call
+    documentation site (http://openweathermap.org/current)"""
+
+    # Checking that the message is actually a location
+    if not hasattr(message, 'location'):
+        raise AttributeError  # Use a custom exception in the future
+
+    TOKEN = get_OpenWeatherAPI_token()
+
+    # Getting longitude and latitude from location
+    lon = message.location.longitude
+    lat = message.location.latitude
+
+    # Asking for the weather
+    current_weather_URL = "http://api.openweathermap.org/data/2.5/forecast"
+    params = {'appid': TOKEN, 'lon': lon, 'lat': lat}
+    rq = requests.get(current_weather_URL, params=params)
+
+    weather = []
+
+    # Deserializing the JSON text
+    json_text = json.loads(rq.text)
+
+    # Obtaining all the weather forecast in the 5-day range
+    forecast_list = json_text['list']
+    for forecast in forecast_list:
+        weather.append(forecast['weather'])
+
+    # Returning the weather
+    return weather
