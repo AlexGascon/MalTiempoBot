@@ -2,6 +2,7 @@
 import telebot
 import os
 
+from utils import store_user_location
 from weather import get_current_weather_in_location, is_bad_weather, get_5day_forecast_in_location
 
 # Creating the bot
@@ -24,8 +25,8 @@ def answer_if_I_have_to_worry_from_location_message(message):
     else:
         bot.reply_to(message, 'Pots estar tranquil, que fa bon temps!')
 
+# Method temporarily disabled
 #@bot.message_handler(commands=['lavadora'])
-@bot.message_handler(content_types=['location'])
 def check_5day_forecast_from_location(message):
     """Method that indicates if there will be any bad weather in the following 5 days"""
 
@@ -39,6 +40,9 @@ def check_5day_forecast_from_location(message):
     else:
         bot.reply_to(message, 'Pots estar tranquil, que fa i farà bon temps!')
 
+@bot.message_handler(content_types=['location'])
+def update_user_location(message):
+    store_user_location(message.from_user, message.location)
 
 
 @bot.message_handler(regexp='^ping$')
