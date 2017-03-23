@@ -1,4 +1,5 @@
 import os
+import psycopg2
 
 
 """
@@ -23,10 +24,8 @@ def get_db_cursor():
     DB_URI = os.environ.get('DATABASE_URL')
 
     # Connecting to the DB
-    try:
-        conn = psycopg2.connect(DB_URI)
-    except:
-        return -1
+    conn = psycopg2.connect(DB_URI)
+
 
     # Open a cursor to perform database operations
     cur = conn.cursor()
