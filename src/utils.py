@@ -48,3 +48,29 @@ def close_db_from_cursor(cursor):
 
     return True
 
+
+def store_user_location(user, location):
+    """
+    Gets a user and its location and stores them in the DB
+    """
+
+    # Extracting the necessary parameters from the input
+    userid = user.id
+    lon = location.longitude
+    lat = location.latitude
+
+    # Getting the cursor to operate with the DB
+    cur = get_db_cursor()
+
+    # Storing the data
+    SQL_QUERY = """
+                INSERT INTO user_location (user_id, longitude, latitude) VALUES ({user_id}, {longitude}, {latitude})
+                """.format(user_id=userid, longitude=lon, latitude=lat)
+    cur.execute(SQL_QUERY)
+
+    # Saving changes to the DB and closing the connection
+    cur.connection.commit()
+    close_db_from_cursor(cur)
+
+    return True
+
