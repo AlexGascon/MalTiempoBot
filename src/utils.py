@@ -63,8 +63,8 @@ def store_user_location(user, location):
 
     # Storing the data
     SQL_QUERY = """
-                INSERT INTO user_location (user_id, longitude, latitude) VALUES ({user_id}, {longitude}, {latitude})
-                """.format(user_id=userid, longitude=lon, latitude=lat)
+                INSERT INTO user_location (userid, longitude, latitude) VALUES ({userid}, {longitude}, {latitude})
+                """.format(userid=userid, longitude=lon, latitude=lat)
     cur.execute(SQL_QUERY)
 
     # Saving changes to the DB and closing the connection
