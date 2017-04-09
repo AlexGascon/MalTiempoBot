@@ -70,7 +70,7 @@ def get_user_location(user):
         row = cur.fetchone()
         lat = row[0]
         lon = row[1]
-    except ProgrammingError:  # There isn't any data in the cursor (i.e. we don't have any location for the user)
+    except:  # There isn't any data in the cursor (i.e. we don't have any location for the user) or we can't retrieve it
         lat = -1
         lon = -1
     finally:
