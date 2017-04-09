@@ -74,7 +74,11 @@ def get_user_location(user):
         lat = -1
         lon = -1
     finally:
+        # Closing connection
+        close_db_from_cursor(cur)
         return (lat, lon)
+    
+
 
 
 def store_user_location(user, location):
