@@ -1,6 +1,5 @@
 import os
 import psycopg2
-
 from psycopg2._psycopg import ProgrammingError
 
 """
@@ -80,7 +79,7 @@ def get_user_location(user):
 
 def store_user_location(user, location):
     """
-    Gets a user and its location and stores them in the DB
+    Gets a user and its location and stores them in the DB. Returns True if everything went as expected
     """
 
     # Extracting the necessary parameters from the input
@@ -91,10 +90,19 @@ def store_user_location(user, location):
     # Getting the cursor to operate with the DB
     cur = get_db_cursor()
 
-    # Storing the data
-    SQL_QUERY = """
-                INSERT INTO user_location (userid, longitude, latitude) VALUES ({userid}, {longitude}, {latitude})
-                """.format(userid=userid, longitude=lon, latitude=lat)
+    # Do we have any location data for the current user?
+    if get_user_location(user) == (-1, -1):
+        # If we don't, we'll insert the info
+        SQL_QUERY = """
+                    INSERT INTO user_location (userid, longitude, latitude) VALUES ({userid}, {longitude}, {latitude})
+                    """.format(userid=userid, longitude=lon, latitude=lat)
+    else:
+        # If we do, we'll update the record
+        SQL_QUERY = """
+                    UPDATE user_location SET latitude = {latitude}, longitude = {longitude} WHERE userid = {userid}
+                    """.format(userid=userid, longitude=lon, latitude=lat)
+
+
     cur.execute(SQL_QUERY)
 
     # Saving changes to the DB and closing the connection
