@@ -26,7 +26,7 @@ def answer_if_I_have_to_worry_from_location_message(message):
         bot.reply_to(message, 'Pots estar tranquil, que fa bon temps!')
 
 # Method temporarily disabled
-#@bot.message_handler(commands=['lavadora'])
+@bot.message_handler(commands=['lavadora'])
 def check_5day_forecast_from_location(message):
     """Method that indicates if there will be any bad weather in the following 5 days"""
 
