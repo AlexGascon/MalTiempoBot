@@ -2,7 +2,7 @@
 import telebot
 import os
 
-from utils import store_user_location
+from utils import store_user_location, get_user_location
 from weather import get_current_weather_in_location, is_bad_weather, get_5day_forecast_in_location
 
 # Creating the bot
@@ -11,11 +11,12 @@ bot = telebot.TeleBot(TOKEN)
 
 
 # The decorator (@bot.message_handler) indicates the type of messages that will activate this function
-#@bot.message_handler(content_types=['location'])
-def answer_if_I_have_to_worry_from_location_message(message):
+@bot.message_handler(commands=['lluvia'])
+def answer_if_I_have_to_worry_from(message):
 
     # Getting the current weather
-    weathers = get_current_weather_in_location(message)
+    lon, lat = get_user_location(message.user)
+    weathers = get_current_weather_in_location(lon, lat)
 
     # Checking if it's raining/snowing/thunderstorming/etc
     I_need_to_worry = [is_bad_weather(weather) for weather in weathers]
@@ -30,7 +31,8 @@ def answer_if_I_have_to_worry_from_location_message(message):
 def check_5day_forecast(message):
     """Method that indicates if there will be any bad weather in the following 5 days"""
 
-    weathers = get_5day_forecast_in_location(message)
+    lon, lat = get_user_location(message.user)
+    weathers = get_5day_forecast_in_location(lon, lat)
 
     # Checking if it's raining/snowing/thunderstorming/etc
     I_need_to_worry = [is_bad_weather(weather) for weather in weathers]
