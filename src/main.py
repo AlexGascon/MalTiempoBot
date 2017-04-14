@@ -42,7 +42,13 @@ def check_5day_forecast_from_location(message):
 
 @bot.message_handler(content_types=['location'])
 def update_user_location(message):
-    store_user_location(message.from_user, message.location)
+    """Saves or updates the location for the current user"""
+    location_stored_correctly = store_user_location(message.from_user, message.location)
+
+    if location_stored_correctly:
+        bot.reply_to(message, "Localització actualitzada correctament!")
+    else:
+        bot.reply_to(message, "No s'ha pogut actualitzar la localització. Per favor, intenta-ho de nou en un altre moment")
 
 
 @bot.message_handler(regexp='^ping$')
