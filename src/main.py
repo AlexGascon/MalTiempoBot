@@ -15,7 +15,7 @@ bot = telebot.TeleBot(TOKEN)
 def answer_if_I_have_to_worry_from(message):
 
     # Getting the current weather
-    lon, lat = get_user_location(message.from)
+    lon, lat = get_user_location(message.from_user)
     weathers = get_current_weather_in_location(lon, lat)
 
     # Checking if it's raining/snowing/thunderstorming/etc
@@ -31,7 +31,7 @@ def answer_if_I_have_to_worry_from(message):
 def check_5day_forecast(message):
     """Method that indicates if there will be any bad weather in the following 5 days"""
 
-    lon, lat = get_user_location(message.from)
+    lon, lat = get_user_location(message.from_user)
     weathers = get_5day_forecast_in_location(lon, lat)
 
     # Checking if it's raining/snowing/thunderstorming/etc
