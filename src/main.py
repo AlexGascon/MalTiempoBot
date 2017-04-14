@@ -27,7 +27,7 @@ def answer_if_I_have_to_worry_from_location_message(message):
 
 # Method temporarily disabled
 @bot.message_handler(commands=['lavadora'])
-def check_5day_forecast_from_location(message):
+def check_5day_forecast(message):
     """Method that indicates if there will be any bad weather in the following 5 days"""
 
     weathers = get_5day_forecast_in_location(message)
