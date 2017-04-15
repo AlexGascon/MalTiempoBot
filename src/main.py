@@ -52,6 +52,12 @@ def update_user_location(message):
     else:
         bot.reply_to(message, "No s'ha pogut actualitzar la localització. Per favor, intenta-ho de nou en un altre moment")
 
+@bot.message_handler(commands=['start', 'help'])
+def get_commands_help(message):
+    """Shows a list of all the current commands"""
+    response = """/lluvia - Indica si hace mal tiempo en este momento \n
+                  /lavadora - Indica si hará mal tiempo en los próximos 5 días"""
+    bot.reply_to(message, response)
 
 @bot.message_handler(regexp='^ping$')
 def test_that_bot_works(message):
