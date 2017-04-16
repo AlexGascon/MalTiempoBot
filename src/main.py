@@ -18,6 +18,12 @@ def answer_if_I_have_to_worry_from(message):
     lon, lat = get_user_location(message.from_user)
     weathers = get_current_weather_in_location(lon, lat)
 
+    # Not checking the weather if we don't have user's location
+    if not weathers:
+        bot.reply_to(message, 'No sé com vols que et diga el temps si no em passes la teua ubicació...')
+        bot.reply_to(message, 'Enviam la teua ubicació i torna a preguntarme pel temps')
+        return None
+
     # Checking if it's raining/snowing/thunderstorming/etc
     I_need_to_worry = [is_bad_weather(weather) for weather in weathers]
 
@@ -33,6 +39,12 @@ def check_5day_forecast(message):
 
     lon, lat = get_user_location(message.from_user)
     weathers = get_5day_forecast_in_location(lon, lat)
+
+    # Not checking the weather if we don't have user's location
+    if not weathers:
+        bot.reply_to(message, 'No sé com vols que et diga el temps si no em passes la teua ubicació...')
+        bot.reply_to(message, 'Enviam la teua ubicació i torna a preguntarme pel temps')
+        return None
 
     # Checking if it's raining/snowing/thunderstorming/etc
     I_need_to_worry = [is_bad_weather(weather) for weather in weathers]
@@ -56,7 +68,7 @@ def update_user_location(message):
 def get_commands_help(message):
     """Shows a list of all the current commands"""
     response = """
-    /lluvia - Indica si hace mal tiempo en este momento \n
+    /lluvia - Indica si hace mal tiempo en este momento\n
     /lavadora - Indica si hará mal tiempo en los próximos 5 días
     """
     bot.reply_to(message, response)
