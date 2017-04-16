@@ -52,7 +52,7 @@ def get_current_weather_in_location(lon, lat):
 
     # Checking that the message contains actually a location
     if (lon, lat) == (-1, -1):
-        raise AttributeError  # Use a custom exception in the future
+        return False  # Use a custom exception in the future
 
     TOKEN = get_OpenWeatherAPI_token()
 
