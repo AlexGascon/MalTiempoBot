@@ -44,7 +44,7 @@ def get_current_weather_in_city(city):
     return weather
 
 
-def get_current_weather_in_location(lon, lat):
+def get_current_weather_in_location(lat, lon):
     """Method that gets the current weather for the specified Telegram Location
 
     The weather is returned in JSON format. More info about the responses can be found in the official API call
@@ -66,7 +66,7 @@ def get_current_weather_in_location(lon, lat):
     return weather
 
 
-def get_5day_forecast_in_location(lon, lat):
+def get_5day_forecast_in_location(lat, lon):
     """Method that gets a 5 day forecast for the specified Telegram Location
 
     The weather is returned in JSON format. More info about the responses can be found in the official API call
