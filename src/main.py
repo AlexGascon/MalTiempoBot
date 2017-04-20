@@ -2,8 +2,9 @@
 import telebot
 import os
 
-from weather import get_current_weather_in_location, is_bad_weather, get_5day_forecast_in_location
 from utils import store_user_location, get_user_location, ask_user_location
+from weather import get_current_weather_in_location, is_bad_weather, get_5day_forecast_in_location, \
+    get_today_forecast_in_location
 
 # Creating the bot
 TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN') # Token previously stored in an environment var
@@ -16,7 +17,7 @@ def answer_if_I_have_to_worry_from(message):
 
     # Getting the current weather
     lat, lon = get_user_location(message.from_user)
-    weathers = get_current_weather_in_location(lat, lon)
+    weathers = get_today_forecast_in_location(lat, lon)
 
     # Not checking the weather if we don't have user's location
     if not weathers:
@@ -31,7 +32,7 @@ def answer_if_I_have_to_worry_from(message):
     else:
         bot.reply_to(message, 'Pots estar tranquil, que fa bon temps!')
 
-# Method temporarily disabled
+
 @bot.message_handler(commands=['lavadora'])
 def check_5day_forecast(message):
     """Method that indicates if there will be any bad weather in the following 5 days"""

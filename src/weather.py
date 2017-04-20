@@ -66,6 +66,20 @@ def get_current_weather_in_location(lat, lon):
     return weather
 
 
+def get_today_forecast_in_location(lat, lon):
+    """Method that gets the current day forecast for the specified location. 
+    
+    As there isn't a direct request to obtain the current day forecast, what we'll do is to obtain the 5-day forecast
+    and return only the predictions corresponding only to the following 24 hours. As the 5-day forecast returns the
+    forecasts in 3 hour timeframes, we'll get the first 8. """
+
+    weathers = get_5day_forecast_in_location(lat, lon)
+    current_day_weathers = weathers[:8]
+
+    return current_day_weathers
+
+
+
 def get_5day_forecast_in_location(lat, lon):
     """Method that gets a 5 day forecast for the specified location
 
