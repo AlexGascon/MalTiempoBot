@@ -1,3 +1,4 @@
+# coding=utf-8
 import os
 import psycopg2
 from psycopg2._psycopg import ProgrammingError
@@ -114,4 +115,11 @@ def store_user_location(user, location):
     close_db_from_cursor(cur)
 
     return True
+
+
+def ask_user_location(bot, message):
+    """Asks the user for his location"""
+    bot.reply_to(message, 'No sé com vols que et diga el temps si no em passes la teua ubicació...')
+    bot.send_message(message.chat.id, 'Enviam la teua ubicació i torna a preguntarme pel temps')
+
 
