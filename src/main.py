@@ -12,7 +12,7 @@ bot = telebot.TeleBot(TOKEN)
 
 
 # The decorator (@bot.message_handler) indicates the type of messages that will activate this function
-@bot.message_handler(commands=['lluvia'])
+@bot.message_handler(commands=['paraguas'])
 def answer_if_I_have_to_worry_from(message):
 
     # Getting the current weather
@@ -53,6 +53,7 @@ def check_5day_forecast(message):
     else:
         bot.reply_to(message, 'Pots estar tranquil, que fa i farà bon temps!')
 
+
 @bot.message_handler(content_types=['location'])
 def update_user_location(message):
     """Saves or updates the location for the current user"""
@@ -62,6 +63,7 @@ def update_user_location(message):
         bot.reply_to(message, "Localització actualitzada correctament!")
     else:
         bot.reply_to(message, "No s'ha pogut actualitzar la localització. Per favor, intenta-ho de nou en un altre moment")
+
 
 @bot.message_handler(commands=['start', 'help'])
 def get_commands_help(message):
