@@ -92,7 +92,7 @@ def get_commands_help(message):
         itembtn_washingmachine = types.KeyboardButton('/lavadora')
     keyboard.add(itembtn_umbrella, itembtn_washingmachine)
 
-    bot.send_message(message, response, reply_markup=keyboard)
+    bot.send_message(message.chat.id, response, reply_markup=keyboard)
 
 
 @bot.message_handler(regexp='^ping$')
