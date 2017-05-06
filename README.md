@@ -17,9 +17,12 @@ The next step is to use the corresponding command to get the weather updates. Yo
 
 And that's it! Simple but effective, as you can see in the following pictures
 
+<img src="./img/umbrella command.jpg" width="40%"><img src="./img/umbrella command (rain).jpg" width="40%">
+<img src="./img/washingmachine command.jpg" width="40%">
+
 
 ### About the author
-Hi! My name is Alex Gascón and I'm a Telecom Engineer passionate about software development that has fallen in love with Python. You can found me [here on my Github](https://github.com/AlexGascon), [on Twitter](https://twitter.com/Psicomanchester) and [on Medium](https://medium.com/@AlexGascon), or by email on alexgascon.93@gmail.com. I would love to help you or get your feedback!
+Hi! My name is Alex Gascón and I'm a Telecom Engineer passionate about software development. You can found me [here on my Github](https://github.com/AlexGascon), [on Twitter](https://twitter.com/Psicomanchester) and [on Medium](https://medium.com/@AlexGascon), or by email on alexgascon.93@gmail.com. I would love to help you or get your feedback!
 
 ### Credits
 <div>Icon made by <a href="http://www.flaticon.com/authors/roundicons" title="Roundicons">Roundicons</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
