@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-   
 import os
-
 import telebot
-from src.constants import TODAY_WORRY_VAL, TODAY_WORRY_ENG, TODAY_NO_WORRY_VAL, TODAY_NO_WORRY_ENG, FORECAST_WORRY_VAL, \
+
+from constants import TODAY_WORRY_VAL, TODAY_WORRY_ENG, TODAY_NO_WORRY_VAL, TODAY_NO_WORRY_ENG, FORECAST_WORRY_VAL, \
     FORECAST_WORRY_ENG, FORECAST_NO_WORRY_ENG, FORECAST_NO_WORRY_VAL, LOCATION_STORED_CORRECTLY_ENG, \
     LOCATION_STORED_CORRECTLY_VAL, LOCATION_NOT_STORED_CORRECTLY_ENG, LOCATION_NOT_STORED_CORRECTLY_VAL, HELP_VAL, \
     HELP_ENG
-
 from utils import store_user_location, get_user_location, ask_user_location, is_bot_English
 from weather import is_bad_weather, get_5day_forecast_in_location, \
     get_today_forecast_in_location
