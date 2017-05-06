@@ -8,7 +8,7 @@ from constants import TODAY_WORRY_VAL, TODAY_WORRY_ENG, TODAY_NO_WORRY_VAL, TODA
     LOCATION_STORED_CORRECTLY_VAL, LOCATION_NOT_STORED_CORRECTLY_ENG, LOCATION_NOT_STORED_CORRECTLY_VAL, HELP_VAL, \
     HELP_ENG
 from utils import store_user_location, get_user_location, ask_user_location, is_bot_English
-from weather import is_bad_weather, get_5day_forecast_in_location, \
+from weather import is_bad_weather, get_3day_forecast_in_location, \
     get_today_forecast_in_location
 
 # Creating the bot
@@ -42,11 +42,11 @@ def answer_if_I_have_to_worry_from(message):
 
 
 @bot.message_handler(commands=['lavadora', 'washingmachine'])
-def check_5day_forecast(message):
+def check_3day_forecast(message):
     """Method that indicates if there will be any bad weather in the following 5 days"""
 
     lat, lon = get_user_location(message.from_user)
-    weathers = get_5day_forecast_in_location(lat, lon)
+    weathers = get_3day_forecast_in_location(lat, lon)
 
     # Not checking the weather if we don't have user's location
     if not weathers:
