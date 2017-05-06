@@ -13,6 +13,18 @@ def get_OpenWeatherAPI_token():
     return TOKEN
 
 """
+LANGUAGE SECTION
+"""
+def is_bot_English():
+    """Checking if the bot should answer in English or not"""
+    TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
+    BADWEATHERBOT_TOKEN = os.environ.get('BADWEATHERBOT_TOKEN')
+
+    return TOKEN == BADWEATHERBOT_TOKEN
+
+
+
+"""
 DATABASE SECTION
 """
 def get_db_cursor():
