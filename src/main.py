@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-   
 import os
 import telebot
+from telebot import types
 
 from constants import TODAY_WORRY_VAL, TODAY_WORRY_ENG, TODAY_NO_WORRY_VAL, TODAY_NO_WORRY_ENG, FORECAST_WORRY_VAL, \
     FORECAST_WORRY_ENG, FORECAST_NO_WORRY_ENG, FORECAST_NO_WORRY_VAL, LOCATION_STORED_CORRECTLY_ENG, \
@@ -80,12 +81,24 @@ def update_user_location(message):
 def get_commands_help(message):
     """Shows a list of all the current commands"""
     response = HELP_ENG if is_bot_English() else HELP_VAL
-    bot.reply_to(message, response)
+
+    # Creating a custom keyboard to simplify the commands entering process
+    keyboard = types.ReplyKeyboardMarkup(row_width=2, one_time_keyboard=False)
+    if is_bot_English():
+        itembtn_umbrella = types.KeyboardButton('/umbrella')
+        itembtn_washingmachine = types.KeyboardButton('/washingmachine')
+    else:
+        itembtn_umbrella = types.KeyboardButton('/paraguas')
+        itembtn_washingmachine = types.KeyboardButton('/lavadora')
+    keyboard.add(itembtn_umbrella, itembtn_washingmachine)
+
+    bot.reply_to(message, response, keyboard=keyboard)
 
 
 @bot.message_handler(regexp='^ping$')
 def test_that_bot_works(message):
     bot.reply_to(message, 'ACK')
+
 
 # Starting the bot
 bot.polling(none_stop=True)
