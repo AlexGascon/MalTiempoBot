@@ -39,7 +39,7 @@ SECTION: ANSWER SENTENCES
 TODAY_NO_WORRY_ENG = "Don't worry bro, the sun will shine today!"
 TODAY_WORRY_ENG = "Bad news, today it's rain day..."
 FORECAST_NO_WORRY_ENG = "Don't worry pal! The sun is shining and will keep doing it!"
-FORECAST_WORRY_ENG = "You should with more detail to the weather, it will rain within 3 days"
+FORECAST_WORRY_ENG = "You shouldn't do that, it will rain within 3 days"
 LOCATION_STORED_CORRECTLY_ENG = "Location correctly updated!"
 LOCATION_NOT_STORED_CORRECTLY_ENG = "Impossible to update location. Please try again later"
 HELP_ENG = "/umbrella - Tells if the weather will be bad in the following 24 hours\n" \
