@@ -75,6 +75,19 @@ def update_user_location(message):
     else:
         answer = LOCATION_NOT_STORED_CORRECTLY_ENG if is_bot_English() else LOCATION_NOT_STORED_CORRECTLY_VAL
         bot.reply_to(message, answer)
+        
+    # Creating a custom keyboard to simplify the commands entering process
+    keyboard = types.ReplyKeyboardMarkup(row_width=2, one_time_keyboard=False, resize_keyboard=True)
+    if is_bot_English():
+        itembtn_umbrella = types.KeyboardButton('/umbrella')
+        itembtn_washingmachine = types.KeyboardButton('/washingmachine')
+    else:
+        itembtn_umbrella = types.KeyboardButton('/paraguas')
+        itembtn_washingmachine = types.KeyboardButton('/lavadora')
+    keyboard.add(itembtn_umbrella, itembtn_washingmachine)
+
+    bot.send_message(message.chat.id, response, reply_markup=keyboard)
+
 
 
 @bot.message_handler(commands=['help'])
@@ -110,6 +123,8 @@ def start_and_ask_location(message):
     keyboard = types.ReplyKeyboardMarkup(row_width=2, one_time_keyboard=True)
     keyboard.add(itembtn_location)
     bot.send_message(message.chat.id, INTRODUCTION_MSG, reply_markup=keyboard)
+
+
 
 
 @bot.message_handler(regexp='^ping$')
