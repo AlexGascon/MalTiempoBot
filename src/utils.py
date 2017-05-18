@@ -1,7 +1,6 @@
 # coding=utf-8
 import os
 import psycopg2
-from psycopg2._psycopg import ProgrammingError
 
 """
 API SECTION
