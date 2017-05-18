@@ -94,7 +94,7 @@ def get_commands_help(message):
 
     bot.send_message(message.chat.id, response, reply_markup=keyboard)
 
-ç
+
 @bot.message_handler(commands=['start'])
 def start_and_ask_location(message):
     """Presents itself and asks for the user location"""
