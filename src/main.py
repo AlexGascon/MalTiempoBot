@@ -71,10 +71,8 @@ def update_user_location(message):
 
     if location_stored_correctly:
         answer = LOCATION_STORED_CORRECTLY_ENG if is_bot_English() else LOCATION_STORED_CORRECTLY_VAL
-        bot.reply_to(message, answer)
     else:
         answer = LOCATION_NOT_STORED_CORRECTLY_ENG if is_bot_English() else LOCATION_NOT_STORED_CORRECTLY_VAL
-        bot.reply_to(message, answer)
 
     # Creating a custom keyboard to simplify the commands entering process
     keyboard = types.ReplyKeyboardMarkup(row_width=2, one_time_keyboard=False, resize_keyboard=True)
@@ -86,7 +84,7 @@ def update_user_location(message):
         itembtn_washingmachine = types.KeyboardButton('/lavadora')
     keyboard.add(itembtn_umbrella, itembtn_washingmachine)
 
-    bot.send_message(message.chat.id, response, reply_markup=keyboard)
+    bot.send_message(message.chat.id, answer, reply_markup=keyboard)
 
 
 
