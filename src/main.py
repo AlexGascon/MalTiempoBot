@@ -6,7 +6,7 @@ from telebot import types
 from constants import TODAY_WORRY_VAL, TODAY_WORRY_ENG, TODAY_NO_WORRY_VAL, TODAY_NO_WORRY_ENG, FORECAST_WORRY_VAL, \
     FORECAST_WORRY_ENG, FORECAST_NO_WORRY_ENG, FORECAST_NO_WORRY_VAL, LOCATION_STORED_CORRECTLY_ENG, \
     LOCATION_STORED_CORRECTLY_VAL, LOCATION_NOT_STORED_CORRECTLY_ENG, LOCATION_NOT_STORED_CORRECTLY_VAL, HELP_VAL, \
-    HELP_ENG
+    HELP_ENG, INTRODUCTION_ENG, INTRODUCTION_VAL
 from utils import store_user_location, get_user_location, ask_user_location, is_bot_English
 from weather import is_bad_weather, get_3day_forecast_in_location, \
     get_today_forecast_in_location
@@ -77,7 +77,7 @@ def update_user_location(message):
         bot.reply_to(message, answer)
 
 
-@bot.message_handler(commands=['start', 'help'])
+@bot.message_handler(commands=['help'])
 def get_commands_help(message):
     """Shows a list of all the current commands"""
     response = HELP_ENG if is_bot_English() else HELP_VAL
@@ -93,6 +93,23 @@ def get_commands_help(message):
     keyboard.add(itembtn_umbrella, itembtn_washingmachine)
 
     bot.send_message(message.chat.id, response, reply_markup=keyboard)
+
+ç
+@bot.message_handler(commands=['start'])
+def start_and_ask_location(message):
+    """Presents itself and asks for the user location"""
+
+    # Setting a "Send location" keyboard button
+    if is_bot_English():
+        INTRODUCTION_MSG = INTRODUCTION_ENG
+        itembtn_location = types.KeyboardButton("Of course I will, no problem bro!", request_location=True)
+    else:
+        INTRODUCTION_MSG = INTRODUCTION_VAL
+        itembtn_location = types.KeyboardButton("Clar que sí home, el que faça falta!", request_location=True)
+
+    keyboard = types.ReplyKeyboardMarkup(row_width=2, one_time_keyboard=True)
+    keyboard.add(itembtn_location)
+    bot.send_message(message.chat.id, INTRODUCTION_MSG, reply_markup=keyboard)
 
 
 @bot.message_handler(regexp='^ping$')
