@@ -83,7 +83,7 @@ def get_commands_help(message):
     response = HELP_ENG if is_bot_English() else HELP_VAL
 
     # Creating a custom keyboard to simplify the commands entering process
-    keyboard = types.ReplyKeyboardMarkup(row_width=2, one_time_keyboard=False)
+    keyboard = types.ReplyKeyboardMarkup(row_width=2, one_time_keyboard=False, resize_keyboard=True)
     if is_bot_English():
         itembtn_umbrella = types.KeyboardButton('/umbrella')
         itembtn_washingmachine = types.KeyboardButton('/washingmachine')
