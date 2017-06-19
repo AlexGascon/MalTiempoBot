@@ -111,3 +111,27 @@ def get_3day_forecast_in_location(lat, lon):
     # As the forecast returns the weather in 3hours intervals, 8 items represent 24 hours (1 day).
     # Therefore, 3*8 = 24 items represent 3*1 = 3 days
     return weathers[:24]
+
+
+def get_today_temperatures_in_location(lat, lon):
+    """Returns an array with the min temperatures expected for the following 24 hours"""
+
+    TOKEN = get_OpenWeatherAPI_token()
+
+    # Asking for the weather
+    current_weather_URL = "http://api.openweathermap.org/data/2.5/forecast"
+    params = {'appid': TOKEN, 'lon': lon, 'lat': lat}
+    rq = requests.get(current_weather_URL, params=params)
+
+    # Deserializing the JSON text
+    json_text = json.loads(rq.text)
+
+    # Obtaining all the weather forecast in the 5-day range
+    min_temperatures = []
+    forecast_list = json_text['list']
+    for forecast in forecast_list:
+        # The temperature is in Kelvin, so we'll convert it to Celsius
+        min_temp_kelvin = float(forecast['main']['temp_min'])
+        min_temperatures.append(min_temp_kelvin - 273.15)
+
+    return min_temperatures[:8]
