@@ -6,10 +6,10 @@ from telebot import types
 from constants import TODAY_WORRY_VAL, TODAY_WORRY_ENG, TODAY_NO_WORRY_VAL, TODAY_NO_WORRY_ENG, FORECAST_WORRY_VAL, \
     FORECAST_WORRY_ENG, FORECAST_NO_WORRY_ENG, FORECAST_NO_WORRY_VAL, LOCATION_STORED_CORRECTLY_ENG, \
     LOCATION_STORED_CORRECTLY_VAL, LOCATION_NOT_STORED_CORRECTLY_ENG, LOCATION_NOT_STORED_CORRECTLY_VAL, HELP_VAL, \
-    HELP_ENG, INTRODUCTION_ENG, INTRODUCTION_VAL
+    HELP_ENG, INTRODUCTION_ENG, INTRODUCTION_VAL, LOW_TEMPERATURE_ENG, LOW_TEMPERATURE_VAL
 from utils import store_user_location, get_user_location, ask_user_location, is_bot_English
 from weather import is_bad_weather, get_3day_forecast_in_location, \
-    get_today_forecast_in_location
+    get_today_forecast_in_location, get_today_temperatures_in_location
 
 # Creating the bot
 TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN') # Token previously stored in an environment var
@@ -39,6 +39,29 @@ def answer_if_I_have_to_worry_from(message):
     else:
         answer = TODAY_NO_WORRY_ENG if is_bot_English() else TODAY_NO_WORRY_VAL
         bot.reply_to(message, answer)
+
+
+@bot.message_handler(commands=['frio', 'cold'])
+def cold(message):
+    """Method that indicates the lowest temperature of the following 24 hours"""
+
+    lat, lon = get_user_location(message.from_user)
+
+    # Not checking the weather if we don't have user's location
+    if (lat, lon == -1, -1):
+        ask_user_location(bot, message)
+        return None
+    else:
+        temperatures = get_today_temperatures_in_location(lat, lon)
+
+    min_temperature = min(temperatures)
+    if is_bot_English():
+        answer = LOW_TEMPERATURE_ENG
+    else:
+        answer = LOW_TEMPERATURE_VAL
+
+    COLD_MSG = answer.format(min_temperature)
+    bot.reply_to(message, COLD_MSG)
 
 
 @bot.message_handler(commands=['lavadora', 'washingmachine'])
