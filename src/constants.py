@@ -55,7 +55,8 @@ LOW_TEMPERATURE_ENG = "Today's min temperature will be {} Celsius degrees. Now i
 LOCATION_STORED_CORRECTLY_ENG = "Location correctly updated!"
 LOCATION_NOT_STORED_CORRECTLY_ENG = "Impossible to update location. Please try again later"
 HELP_ENG = "/umbrella - Tells if the weather will be bad in the following 24 hours\n" \
-    + "/washingmachine - Tells if the weather will be bad within 3 days"
+    + "/washingmachine - Tells if the weather will be bad within 3 days\n" \
+    + "/cold - Indicates the minimum temperature of the following 24 hours"
 
 
 INTRODUCTION_VAL = """Bon dia company! Soc @MalTiempoBot, el bot que et permetrà saber si farà mal temps pròximament. \
@@ -77,5 +78,6 @@ LOW_TEMPERATURE_VAL = 'Hui tindrem mínimes de {} graus. Tu voràs si abrigar-te
 LOCATION_STORED_CORRECTLY_VAL = "Localització actualitzada correctament!"
 LOCATION_NOT_STORED_CORRECTLY_VAL = "No s'ha pogut actualitzar la localització. Per favor, intenta-ho de nou en un altre moment"
 HELP_VAL = "/paraguas - Indica si hace mal tiempo en este momento\n" \
-    + "/lavadora - Indica si hará mal tiempo en los próximos 3 días"
+    + "/lavadora - Indica si hará mal tiempo en los próximos 3 días\n" \
+    + "/frio - Indica la mínima temperatura que habrá en las próximas 24 horas"
 

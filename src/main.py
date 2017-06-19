@@ -18,7 +18,7 @@ bot = telebot.TeleBot(TOKEN)
 
 # The decorator (@bot.message_handler) indicates the type of messages that will activate this function
 @bot.message_handler(commands=['paraguas', 'umbrella'])
-def answer_if_I_have_to_worry_from(message):
+def umbrella(message):
 
     # Getting the current weather
     lat, lon = get_user_location(message.from_user)
@@ -65,8 +65,8 @@ def cold(message):
 
 
 @bot.message_handler(commands=['lavadora', 'washingmachine'])
-def check_3day_forecast(message):
-    """Method that indicates if there will be any bad weather in the following 5 days"""
+def washingmachine(message):
+    """Method that indicates if there will be any bad weather in the following 3 days"""
 
     lat, lon = get_user_location(message.from_user)
     weathers = get_3day_forecast_in_location(lat, lon)
@@ -102,10 +102,12 @@ def update_user_location(message):
     if is_bot_English():
         itembtn_umbrella = types.KeyboardButton('/umbrella')
         itembtn_washingmachine = types.KeyboardButton('/washingmachine')
+        itembtn_cold = types.KeyboardButton('/cold')
     else:
         itembtn_umbrella = types.KeyboardButton('/paraguas')
         itembtn_washingmachine = types.KeyboardButton('/lavadora')
-    keyboard.add(itembtn_umbrella, itembtn_washingmachine)
+        itembtn_cold = types.KeyboardButton('/frio')
+    keyboard.add(itembtn_umbrella, itembtn_washingmachine, itembtn_cold)
 
     bot.send_message(message.chat.id, answer, reply_markup=keyboard)
 
@@ -121,10 +123,12 @@ def get_commands_help(message):
     if is_bot_English():
         itembtn_umbrella = types.KeyboardButton('/umbrella')
         itembtn_washingmachine = types.KeyboardButton('/washingmachine')
+        itembtn_cold = types.KeyboardButton('/cold')
     else:
         itembtn_umbrella = types.KeyboardButton('/paraguas')
         itembtn_washingmachine = types.KeyboardButton('/lavadora')
-    keyboard.add(itembtn_umbrella, itembtn_washingmachine)
+        itembtn_cold = types.KeyboardButton('/frio')
+    keyboard.add(itembtn_umbrella, itembtn_washingmachine, itembtn_cold)
 
     bot.send_message(message.chat.id, response, reply_markup=keyboard)
 
