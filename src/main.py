@@ -48,7 +48,7 @@ def cold(message):
     lat, lon = get_user_location(message.from_user)
 
     # Not checking the weather if we don't have user's location
-    if (lat, lon == -1, -1):
+    if (lat == -1) and (lon == -1):
         ask_user_location(bot, message)
         return None
     else:
