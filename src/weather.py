@@ -22,7 +22,6 @@ def obtain_weather_from_api_response(response):
 
 def is_bad_weather(weather):
     """Method that returns a boolean indicating if the weather is bad (rain, snow, thunderstorm...)"""
-
     return weather['id'] not in WEATHER_GROUP_GOOD_WEATHER
 
 
@@ -35,9 +34,9 @@ def get_current_weather_in_city(city):
     TOKEN = get_OpenWeatherAPI_token()
 
     # Asking for the weather
-    current_weather_URL = "http://api.openweathermap.org/data/2.5/weather"
+    current_weather_url = "http://api.openweathermap.org/data/2.5/weather"
     params = {'appid': TOKEN, 'q': city}
-    rq = requests.get(current_weather_URL, params=params)
+    rq = requests.get(current_weather_url, params=params)
 
     # Returning the weather
     weather = obtain_weather_from_api_response(rq)
@@ -57,9 +56,9 @@ def get_current_weather_in_location(lat, lon):
     TOKEN = get_OpenWeatherAPI_token()
 
     # Asking for the weather
-    current_weather_URL = "http://api.openweathermap.org/data/2.5/weather"
-    params = {'appid': TOKEN, 'lon':lon, 'lat':lat}
-    rq = requests.get(current_weather_URL, params=params)
+    current_weather_url = "http://api.openweathermap.org/data/2.5/weather"
+    params = {'appid': TOKEN, 'lon': lon, 'lat': lat}
+    rq = requests.get(current_weather_url, params=params)
 
     # Returning the weather
     weather = obtain_weather_from_api_response(rq)
@@ -93,9 +92,9 @@ def get_3day_forecast_in_location(lat, lon):
     TOKEN = get_OpenWeatherAPI_token()
 
     # Asking for the weather
-    current_weather_URL = "http://api.openweathermap.org/data/2.5/forecast"
+    current_weather_url = "http://api.openweathermap.org/data/2.5/forecast"
     params = {'appid': TOKEN, 'lon': lon, 'lat': lat}
-    rq = requests.get(current_weather_URL, params=params)
+    rq = requests.get(current_weather_url, params=params)
 
     weathers = []
     # Deserializing the JSON text
