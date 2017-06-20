@@ -12,7 +12,7 @@ from weather import is_bad_weather, get_3day_forecast_in_location, \
     get_today_forecast_in_location, get_today_temperatures_in_location
 
 # Creating the bot
-TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN') # Token previously stored in an environment var
+TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')  # Token previously stored in an environment var
 bot = telebot.TeleBot(TOKEN)
 
 
@@ -30,15 +30,14 @@ def umbrella(message):
         return None
 
     # Checking if it's raining/snowing/thunderstorming/etc
-    I_need_to_worry = [is_bad_weather(weather) for weather in weathers]
+    i_need_to_worry = [is_bad_weather(weather) for weather in weathers]
 
     # Answering to the user
-    if True in I_need_to_worry:
+    if True in i_need_to_worry:
         answer = TODAY_WORRY_ENG if is_bot_English() else TODAY_WORRY_VAL
-        bot.reply_to(message, answer)
     else:
         answer = TODAY_NO_WORRY_ENG if is_bot_English() else TODAY_NO_WORRY_VAL
-        bot.reply_to(message, answer)
+    bot.reply_to(message, answer)
 
 
 @bot.message_handler(commands=['frio', 'cold'])
@@ -51,17 +50,17 @@ def cold(message):
     if (lat == -1) and (lon == -1):
         ask_user_location(bot, message)
         return None
+    # If we have it, we'll get the min temperature and answering the user
     else:
         temperatures = get_today_temperatures_in_location(lat, lon)
-
     min_temperature = min(temperatures)
-    if is_bot_English():
-        answer = LOW_TEMPERATURE_ENG
-    else:
-        answer = LOW_TEMPERATURE_VAL
 
-    COLD_MSG = answer.format(min_temperature)
-    bot.reply_to(message, COLD_MSG)
+    # Answering to the user
+    if is_bot_English():
+        answer = LOW_TEMPERATURE_ENG.format(min_temperature)
+    else:
+        answer = LOW_TEMPERATURE_VAL.format(min_temperature)
+    bot.reply_to(message, answer)
 
 
 @bot.message_handler(commands=['lavadora', 'washingmachine'])
@@ -77,14 +76,14 @@ def washingmachine(message):
         return None
 
     # Checking if it's raining/snowing/thunderstorming/etc
-    I_need_to_worry = [is_bad_weather(weather) for weather in weathers]
+    i_need_to_worry = [is_bad_weather(weather) for weather in weathers]
 
-    if True in I_need_to_worry:
+    # Choosing the language and answering the user
+    if True in i_need_to_worry:
         answer = FORECAST_WORRY_ENG if is_bot_English() else FORECAST_WORRY_VAL
-        bot.reply_to(message, answer)
     else:
         answer = FORECAST_NO_WORRY_ENG if is_bot_English() else FORECAST_NO_WORRY_VAL
-        bot.reply_to(message, answer)
+    bot.reply_to(message, answer)
 
 
 @bot.message_handler(content_types=['location'])
@@ -110,7 +109,6 @@ def update_user_location(message):
     keyboard.add(itembtn_umbrella, itembtn_washingmachine, itembtn_cold)
 
     bot.send_message(message.chat.id, answer, reply_markup=keyboard)
-
 
 
 @bot.message_handler(commands=['help'])
@@ -148,8 +146,6 @@ def start_and_ask_location(message):
     keyboard = types.ReplyKeyboardMarkup(row_width=1, one_time_keyboard=True, resize_keyboard=True)
     keyboard.add(itembtn_location)
     bot.send_message(message.chat.id, INTRODUCTION_MSG, reply_markup=keyboard)
-
-
 
 
 @bot.message_handler(regexp='^ping$')

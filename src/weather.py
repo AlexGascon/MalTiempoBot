@@ -22,7 +22,6 @@ def obtain_weather_from_api_response(response):
 
 def is_bad_weather(weather):
     """Method that returns a boolean indicating if the weather is bad (rain, snow, thunderstorm...)"""
-
     return weather['id'] not in WEATHER_GROUP_GOOD_WEATHER
 
 
