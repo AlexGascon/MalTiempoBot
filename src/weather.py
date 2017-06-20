@@ -72,11 +72,7 @@ def get_today_forecast_in_location(lat, lon):
     and return only the predictions corresponding only to the following 24 hours. As the 5-day forecast returns the
     forecasts in 3 hour timeframes, we'll get the first 8. """
 
-    weathers = get_3day_forecast_in_location(lat, lon)
-    current_day_weathers = weathers[:8]
-
-    return current_day_weathers
-
+    return get_forecast_in_location(lat=lat, lon=lon, days=1)
 
 
 def get_3day_forecast_in_location(lat, lon):
@@ -84,6 +80,15 @@ def get_3day_forecast_in_location(lat, lon):
 
     The weather is returned in JSON format. More info about the responses can be found in the official API call
     documentation site (http://openweathermap.org/current)"""
+
+    return get_forecast_in_location(lat=lat, lon=lon, days=3)
+
+
+def get_forecast_in_location(lat, lon, days=3):
+    """Generic method to get the forecast in a specified location for a variable number of days
+
+    The weather is returned in JSON format. More info about the responses can be found in the official API documentation
+    site (http://openweathermap.org/current)"""
 
     # Checking that the message contains actually a location
     if (lon, lat) == (-1, -1):
@@ -107,10 +112,8 @@ def get_3day_forecast_in_location(lat, lon):
             weathers.append(weather)
 
     # Returning the weather
-    # As the forecast returns the weather in 3hours intervals, 8 items represent 24 hours (1 day).
-    # Therefore, 3*8 = 24 items represent 3*1 = 3 days
-    return weathers[:24]
-
+    # As the forecast returns the weather in 3-hours intervals, 8 items represent 24 hours (1 day)
+    return weathers[:days*8]
 
 def get_today_temperatures_in_location(lat, lon):
     """Returns an array with the min temperatures expected for the following 24 hours"""
