@@ -4,10 +4,14 @@ from constants import WEATHER_GROUP_GOOD_WEATHER
 
 
 class Weather:
-    """Represents the weather information obtained when calling the OpenWeatherMap API"""
+    """Represent the weather information obtained when calling the OpenWeatherMap API"""
 
     def __init__(self, api_response):
-        """Constructor. Deserializes the JSON text and parses the parameters"""
+        """Constructor. Deserializethe JSON text and parse the parameters
+
+        Arguments:
+        api_response -- the response returnedafter calling OpenWeatherMap API
+        """
         # Deserializing the JSON text
         json_text = json.loads(api_response)
 
@@ -22,6 +26,5 @@ class Weather:
         self.icon = weather_section['icon']
 
     def is_bad(self):
-        """Method that returns a boolean indicating if the weather is bad (rain, snow, thunderstorm...)"""
+        """Return a boolean indicating if the weather is bad (rain, snow...)"""
         return self.id not in WEATHER_GROUP_GOOD_WEATHER
-    
