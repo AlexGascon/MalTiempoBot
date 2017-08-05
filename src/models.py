@@ -4,13 +4,20 @@ from constants import WEATHER_GROUP_GOOD_WEATHER
 
 
 class Weather:
-    """Represent the weather information obtained when calling the OpenWeatherMap API"""
+    """Weather information obtained when calling the OpenWeatherMap API
+
+    Parameters:
+        id -- unique identifier for the weather condition
+        main -- group of weather parameters (Rain, Snow, Extreme etc.)
+        description -- description of the weather condition
+        icon -- weather condition ID (currently unused)
+    """
 
     def __init__(self, api_response):
-        """Constructor. Deserializethe JSON text and parse the parameters
+        """Constructor. Deserialize the JSON text and parse the parameters
 
         Arguments:
-        api_response -- the response returnedafter calling OpenWeatherMap API
+        api_response -- the response returned after calling OpenWeatherMap API
         """
         # Deserializing the JSON text
         json_text = json.loads(api_response)
