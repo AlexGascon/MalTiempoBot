@@ -60,6 +60,11 @@ class Forecast:
         weather_list = json_text['list']
 
         for weather_info in weather_list:
-            self.weathers.append(Weather(weather_info))
+            self.weathers.append(Weather(api_response=weather_info))
+
+
+    def is_bad(self):
+        """Return a boolean indicating if any of the weathers in the forecast is bad"""
+        return any((weather.is_bad() for weather in self.weathers))
 
 
