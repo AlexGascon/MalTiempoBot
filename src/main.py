@@ -8,7 +8,7 @@ from constants import TODAY_WORRY_VAL, TODAY_WORRY_ENG, TODAY_NO_WORRY_VAL, TODA
     LOCATION_STORED_CORRECTLY_VAL, LOCATION_NOT_STORED_CORRECTLY_ENG, LOCATION_NOT_STORED_CORRECTLY_VAL, HELP_VAL, \
     HELP_ENG, INTRODUCTION_ENG, INTRODUCTION_VAL, LOW_TEMPERATURE_ENG, LOW_TEMPERATURE_VAL
 from utils import store_user_location, get_user_location, ask_user_location, is_bot_English
-from weather import is_bad_weather, get_3day_forecast_in_location, \
+from weather import get_3day_forecast_in_location, \
     get_today_forecast_in_location, get_today_temperatures_in_location
 
 # Creating the bot
