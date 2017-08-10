@@ -22,15 +22,15 @@ def umbrella(message):
 
     # Getting the current weather
     lat, lon = get_user_location(message.from_user)
-    weathers = get_today_forecast_in_location(lat, lon)
+    forecast = get_today_forecast_in_location(lat, lon)
 
     # Not checking the weather if we don't have user's location
-    if not weathers:
+    if not forecast:
         ask_user_location(bot, message)
         return None
 
     # Checking if it's raining/snowing/thunderstorming/etc
-    i_need_to_worry = [is_bad_weather(weather) for weather in weathers]
+    i_need_to_worry = forecast.is_bad()
 
     # Answering to the user
     if True in i_need_to_worry:
@@ -68,15 +68,15 @@ def washingmachine(message):
     """Method that indicates if there will be any bad weather in the following 3 days"""
 
     lat, lon = get_user_location(message.from_user)
-    weathers = get_3day_forecast_in_location(lat, lon)
+    forecast = get_3day_forecast_in_location(lat, lon)
 
     # Not checking the weather if we don't have user's location
-    if not weathers:
+    if not forecast:
         ask_user_location(bot, message)
         return None
 
     # Checking if it's raining/snowing/thunderstorming/etc
-    i_need_to_worry = [is_bad_weather(weather) for weather in weathers]
+    i_need_to_worry = forecast.is_bad()
 
     # Choosing the language and answering the user
     if True in i_need_to_worry:
