@@ -73,7 +73,7 @@ class Forecast:
         temp_weathers = []
 
         for weather_info in weather_list:
-            temp_weathers.append(Weather(api_response=weather_info))
+            temp_weathers.append(Weather(weather_info=weather_info))
 
         # Limiting the amount of weathers in the Forecast if necessary
         if days is not None:
