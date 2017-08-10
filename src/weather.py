@@ -2,22 +2,14 @@ import requests
 import json
 
 from constants import WEATHER_GROUP_GOOD_WEATHER
+from models import Weather, Forecast
 from utils import get_OpenWeatherAPI_token
 
 
 def obtain_weather_from_api_response(response):
-    """Method that gets the OpenWeather response and returns the part corresponding to the weather
+    """Method that gets the OpenWeather response and returns the part corresponding to the weather"""
 
-    NOTE: Weather can be an array containing more than one weather condition"""
-
-    # Deserializing the JSON text
-    json_text = json.loads(response.text)
-
-    # Getting the weather
-    weather_key = 'weather'
-    weather = json_text[weather_key]
-
-    return weather
+    return Weather(response.text)
 
 
 def is_bad_weather(weather):
@@ -39,8 +31,7 @@ def get_current_weather_in_city(city):
     rq = requests.get(current_weather_url, params=params)
 
     # Returning the weather
-    weather = obtain_weather_from_api_response(rq)
-    return weather
+    return obtain_weather_from_api_response(rq)
 
 
 def get_current_weather_in_location(lat, lon):
@@ -61,8 +52,7 @@ def get_current_weather_in_location(lat, lon):
     rq = requests.get(current_weather_url, params=params)
 
     # Returning the weather
-    weather = obtain_weather_from_api_response(rq)
-    return weather
+    return obtain_weather_from_api_response(rq)
 
 
 def get_today_forecast_in_location(lat, lon):
@@ -101,19 +91,8 @@ def get_forecast_in_location(lat, lon, days=3):
     params = {'appid': TOKEN, 'lon': lon, 'lat': lat}
     rq = requests.get(current_weather_url, params=params)
 
-    weathers = []
-    # Deserializing the JSON text
-    json_text = json.loads(rq.text)
+    return Forecast(api_response=rq.text, days=days)
 
-    # Obtaining all the weather forecast in the 5-day range
-    forecast_list = json_text['list']
-    for forecast in forecast_list:
-        for weather in forecast['weather']:
-            weathers.append(weather)
-
-    # Returning the weather
-    # As the forecast returns the weather in 3-hours intervals, 8 items represent 24 hours (1 day)
-    return weathers[:days*8]
 
 def get_today_temperatures_in_location(lat, lon):
     """Returns an array with the min temperatures expected for the following 24 hours"""
