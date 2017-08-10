@@ -29,11 +29,8 @@ def umbrella(message):
         ask_user_location(bot, message)
         return None
 
-    # Checking if it's raining/snowing/thunderstorming/etc
-    i_need_to_worry = forecast.is_bad()
-
-    # Answering to the user
-    if True in i_need_to_worry:
+    # Choosing the language and answering the user
+    if forecast.is_bad():
         answer = TODAY_WORRY_ENG if is_bot_English() else TODAY_WORRY_VAL
     else:
         answer = TODAY_NO_WORRY_ENG if is_bot_English() else TODAY_NO_WORRY_VAL
@@ -75,11 +72,8 @@ def washingmachine(message):
         ask_user_location(bot, message)
         return None
 
-    # Checking if it's raining/snowing/thunderstorming/etc
-    i_need_to_worry = forecast.is_bad()
-
     # Choosing the language and answering the user
-    if True in i_need_to_worry:
+    if forecast.is_bad():
         answer = FORECAST_WORRY_ENG if is_bot_English() else FORECAST_WORRY_VAL
     else:
         answer = FORECAST_NO_WORRY_ENG if is_bot_English() else FORECAST_NO_WORRY_VAL
