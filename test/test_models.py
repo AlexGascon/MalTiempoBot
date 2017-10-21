@@ -29,5 +29,34 @@ class TestWeather(unittest.TestCase):
         self.assertEqual(test_weather.description, 'light intensity drizzle')
         self.assertEqual(test_weather.icon, '09d')
 
+    def test_weather_is_bad_returns_false_when_weather_is_good(self):
+        """Testing that the method Weather.is_bad() returns True when the weather condition is a good one"""
+        test_weather = Weather(weather_info=self.dict_api_response)
+
+        test_weather.id = 800
+        self.assertFalse(test_weather.is_bad())
+        test_weather.id = 801
+        self.assertFalse(test_weather.is_bad())
+        test_weather.id = 802
+        self.assertFalse(test_weather.is_bad())
+        test_weather.id = 803
+        self.assertFalse(test_weather.is_bad())
+        test_weather.id = 804
+        self.assertFalse(test_weather.is_bad())
+        test_weather.id = 951
+        self.assertFalse(test_weather.is_bad())
+
+    def test_weather_is_bad_returns_true_when_weather_is_bad(self):
+        """Testing that the method Weather.is_bad() returns True when the weather condition is a good one"""
+        test_weather = Weather(weather_info=self.dict_api_response)
+
+        test_weather.id = 300
+        self.assertTrue(test_weather.is_bad())
+        test_weather.id = 473
+        self.assertTrue(test_weather.is_bad())
+        test_weather.id = 2432
+        self.assertTrue(test_weather.is_bad())
+
+
 if __name__ == '__main__':
     unittest.__main__()
