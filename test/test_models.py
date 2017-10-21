@@ -15,19 +15,19 @@ class TestWeather(unittest.TestCase):
         """Weather objects can be correctly created from OWM api response in JSON format"""
         test_weather = Weather(api_response=self.json_api_response)
 
-        assert test_weather.id == 300
-        assert test_weather.main == 'Drizzle'
-        assert test_weather.description == 'light intensity drizzle'
-        assert test_weather.icon == '09d'
+        self.assertEqual(test_weather.id, 300)
+        self.assertEqual(test_weather.main, 'Drizzle')
+        self.assertEqual(test_weather.description, 'light intensity drizzle')
+        self.assertEqual(test_weather.icon, '09d')
 
     def test_dict_constructor(self):
         """Weather objects can be correctly created from a dict containing OWM's API response"""
         test_weather = Weather(weather_info=self.dict_api_response)
 
-        assert test_weather.id == 300
-        assert test_weather.main == 'Drizzle'
-        assert test_weather.description == 'light intensity drizzle'
-        assert test_weather.icon == '09d'
+        self.assertEqual(test_weather.id, 300)
+        self.assertEqual(test_weather.main, 'Drizzle')
+        self.assertEqual(test_weather.description, 'light intensity drizzle')
+        self.assertEqual(test_weather.icon, '09d')
 
 if __name__ == '__main__':
     unittest.__main__()
